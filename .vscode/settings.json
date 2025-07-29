@@ -1,0 +1,10 @@
+{
+  "eslint.enable": true,
+  
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.ts": "always"
+  },
+
+  "editor.tabSize": 2,
+}
