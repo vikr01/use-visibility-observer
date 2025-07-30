@@ -12,5 +12,5 @@ export default defineConfig(
       typescript: true,
     }),
   ],
-  globalIgnores(["./lib/*"]),
+  globalIgnores(["./dist/*"]),
 );
