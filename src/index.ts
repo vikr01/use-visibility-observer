@@ -9,12 +9,11 @@ type Options = Readonly<{
 
 type AtLeastOneOfOptions = RequireAtLeastOne<Options, "onShow" | "onHide">;
 
-export default function useVisibilityObserverRef({
-  onHide,
-  onShow,
-}: AtLeastOneOfOptions): Ref<HTMLElement | null> {
+export default function useVisibilityObserverRef<
+  T extends HTMLElement = HTMLElement,
+>({ onHide, onShow }: AtLeastOneOfOptions): Ref<T | null> {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const elementRef = useRef<HTMLElement | null>(null);
+  const elementRef = useRef<T | null>(null);
   const unsubRef = useRef<(() => void) | null>(null);
   const isVisibleRef = useRef<boolean>(false);
   const visibilityChangeListenerRef = useRef<(() => void) | null>(null);
@@ -76,12 +75,10 @@ export default function useVisibilityObserverRef({
     [],
   );
 
-  const callbackRefRef = useRef<((el: HTMLElement | null) => void) | null>(
-    null,
-  );
+  const callbackRefRef = useRef<((el: T | null) => void) | null>(null);
 
   if (callbackRefRef.current == null) {
-    callbackRefRef.current = (el: HTMLElement | null) => {
+    callbackRefRef.current = (el: T | null) => {
       if (elementRef.current === el) {
         return;
       }
