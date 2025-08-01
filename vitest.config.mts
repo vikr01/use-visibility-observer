@@ -9,7 +9,7 @@ export default defineConfig({
 	test: {
 		environment: 'jsdom',
 		exclude: [
-			"./lib",
+			"packages/*/dist",
 			...configDefaults.exclude
 		],
 		setupFiles: [intersectionObserverPolyfill],

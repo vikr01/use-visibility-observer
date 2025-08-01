@@ -1,0 +1,32 @@
+{
+  "name": "use-visibility-observer-ref",
+  "main": "dist/index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/vikr01/use-visibility-observer#readme",
+  "bugs": {
+    "url": "https://github.com/vikr01/use-visibility-observer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikr01/use-visibility-observer.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Vik R",
+    "email": "vik120@icloud.com",
+    "url": "http://github.com/vikr01/"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "type-fest": "^4.41.0",
+    "withinviewport": "^3.0.1"
+  },
+  "peerDependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}

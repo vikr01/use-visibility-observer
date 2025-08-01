@@ -1,5 +1,8 @@
 # Compiled
-/dist
+dist/
+
+# Caches
+.turbo
 
 # Logs
 logs

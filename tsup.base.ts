@@ -1,6 +1,6 @@
-import { defineConfig } from "tsup";
+import { type Options } from "tsup";
 
-export default defineConfig({
+export const tsupBaseConfig: Options = {
   entry: ["src", "!src/**/__tests__/**", "!src/**/*.test.*"],
   outDir: "dist",
   format: ["esm"],
@@ -16,4 +16,4 @@ export default defineConfig({
   sourcemap: false,
   skipNodeModulesBundle: true,
   splitting: false,
-});
+};
