@@ -1,6 +1,7 @@
 import type { Ref } from "react";
 import { useEffect, useRef } from "react";
 import type { RequireAtLeastOne } from "type-fest";
+import { withinViewport } from "withinviewport";
 
 type Options = Readonly<{
   onHide?: () => void;
@@ -11,7 +12,7 @@ type AtLeastOneOfOptions = RequireAtLeastOne<Options, "onShow" | "onHide">;
 
 export default function useVisibilityObserverRef<
   T extends HTMLElement = HTMLElement,
->({ onHide, onShow }: AtLeastOneOfOptions): Ref<T | null> {
+>({ onHide, onShow }: AtLeastOneOfOptions): Ref<T> {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const elementRef = useRef<T | null>(null);
   const unsubRef = useRef<(() => void) | null>(null);
@@ -30,9 +31,7 @@ export default function useVisibilityObserverRef<
         if (isVisibleRef.current === true) {
           onHideRef.current?.();
         }
-      }
-
-      if (document.visibilityState === "visible") {
+      } else if (document.visibilityState === "visible") {
         if (isVisibleRef.current === true) {
           onShowRef.current?.();
         }
@@ -75,10 +74,10 @@ export default function useVisibilityObserverRef<
     [],
   );
 
-  const callbackRefRef = useRef<((el: T | null) => void) | null>(null);
+  const callbackRefRef = useRef<((el: T) => void) | null>(null);
 
   if (callbackRefRef.current == null) {
-    callbackRefRef.current = (el: T | null) => {
+    callbackRefRef.current = (el: T) => {
       if (elementRef.current === el) {
         return;
       }
@@ -87,13 +86,17 @@ export default function useVisibilityObserverRef<
         unsubRef.current?.();
       }
 
-      if (el != null) {
-        observer.observe(el);
-
-        unsubRef.current = () => {
-          observer.observe(el);
-        };
+      try {
+        isVisibleRef.current = withinViewport(el);
+      } catch {
+        isVisibleRef.current = false;
       }
+
+      observer.observe(el);
+
+      unsubRef.current = () => {
+        observer.observe(el);
+      };
       elementRef.current = el;
     };
   }
