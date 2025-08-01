@@ -34,8 +34,8 @@
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
-    "intersection-observer": "^0.12.2",
     "jsdom": "^26.1.0",
+    "jsdom-testing-mocks": "^1.15.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tsup": "^8.5.0",
@@ -50,6 +50,7 @@
     "react-dom": "^19.1.1"
   },
   "dependencies": {
-    "type-fest": "^4.41.0"
+    "type-fest": "^4.41.0",
+    "withinviewport": "^3.0.1"
   }
 }

@@ -2,7 +2,7 @@ import { createRequire } from "module";
 import { defineConfig, configDefaults } from "vitest/config";
 const require = createRequire(import.meta.url);
 const intersectionObserverPolyfill = require.resolve(
-	"intersection-observer",
+	"./test/vitest.setup.ts",
 );
 
 export default defineConfig({
